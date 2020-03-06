@@ -18,7 +18,8 @@ class Table extends Component {
 
   //handler for moving interns into a "removed" state array
   filterInterns = () => {
-    const eRestore = this.state.employees.filter(person => person.title === "Intern");
+    const tempArray = this.state.employees.filter(person => person.title === "Intern");
+    const eRestore= this.state.eRestore.concat(tempArray); 
     this.setState({ eRestore });
 
     const employees = this.state.employees.filter(person => person.title !== "Intern");
@@ -30,6 +31,8 @@ class Table extends Component {
   restoreInterns = () => {
     let employees = this.state.employees.concat(this.state.eRestore); 
     this.setState({ employees });
+    const eRestore = [];
+    this.setState({ eRestore });
   };
 
   //handler for sorting by name
