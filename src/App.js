@@ -16,7 +16,8 @@ class Table extends Component {
     eRestore: []
   };
 
-  filterInterns = id => {
+  //handler for moving interns into a "removed" state array
+  filterInterns = () => {
     const eRestore = this.state.employees.filter(person => person.title === "Intern");
     this.setState({ eRestore });
 
@@ -25,15 +26,53 @@ class Table extends Component {
     
   };
 
-  restoreInterns = id => {
+  //handler for moving interns back into the employees array
+  restoreInterns = () => {
     let employees = this.state.employees.concat(this.state.eRestore); 
     this.setState({ employees });
   };
 
-  sortByName = id => {
-    const employees = this.state.employees.name.sort();
+  //handler for sorting by name
+  sortByName = () => 
+  {
+    let employees = this.state.employees.sort(function (a, b) 
+    {
+      let x = a.name.toUpperCase();
+      let y = b.name.toUpperCase();
+
+      if (x > y) 
+        {return 1}
+
+      if (x < y) 
+        {return -1;}
+
+      return 0;
+    });
+
     this.setState({ employees });
   };
+
+
+  //handler for sorting by title
+  sortByTitle = () => 
+  {
+    let employees = this.state.employees.sort(function (a, b) 
+    {
+      let x = a.title.toUpperCase();
+      let y = b.title.toUpperCase();
+
+      if (x > y) 
+        {return 1}
+
+      if (x < y) 
+        {return -1;}
+
+      return 0;
+    });
+
+    this.setState({ employees });
+  };
+
 
   render() {
     return (
@@ -55,6 +94,7 @@ class Table extends Component {
           <button className="btn btn-warning ml-5" onClick={this.filterInterns}>Remove Interns</button>
           <button className="btn btn-warning ml-5" onClick={this.restoreInterns}>Restore Interns</button>
           <button className="btn btn-warning ml-5" onClick={this.sortByName}>Sort by Name</button>
+          <button className="btn btn-warning ml-5" onClick={this.sortByTitle}>Sort by Title</button>
       </div>
     )
   }
