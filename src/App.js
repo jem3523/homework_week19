@@ -5,22 +5,22 @@ import Createtableheader from "./components/tableHeader";
 class Table extends Component {
   state = {
     employees: [
-      { id: 1, name: 'Jason', age: 50, title: '101 Associate Developer' },
-      { id: 2, name: 'Brent', age: 40, title: '401 Team Lead' },
-      { id: 3, name: 'Nick', age: 30, title: '301 Senior Developer' },
-      { id: 4, name: 'Casey', age: 26, title: '301 Senior Developer' },
-      { id: 5, name: 'Brett', age: 32, title: '201 Developer' },
-      { id: 6, name: 'Mark', age: 15, title: '001 Intern' },
-      { id: 7, name: 'Angie', age: 16, title: '001 Intern' }
+      { id: 1, name: 'Jason', email: "jason@email.com", title: 'Associate Developer' },
+      { id: 2, name: 'Brent', email: "brent@email.com", title: 'Team Lead' },
+      { id: 3, name: 'Nick', email: "nick@email.com", title: 'Senior Developer' },
+      { id: 4, name: 'Casey', email: "casey@email.com", title: 'Senior Developer' },
+      { id: 5, name: 'Brett', email: "brett@email.com", title: 'Developer' },
+      { id: 6, name: 'Mark', email: "mark@email.com", title: 'Intern' },
+      { id: 7, name: 'Angie', email: "angie@email.com", title: 'Intern' }
     ],
     eRestore: []
   };
 
   filterInterns = id => {
-    const eRestore = this.state.employees.filter(person => person.title === "001 Intern");
+    const eRestore = this.state.employees.filter(person => person.title === "Intern");
     this.setState({ eRestore });
 
-    const employees = this.state.employees.filter(person => person.title !== "001 Intern");
+    const employees = this.state.employees.filter(person => person.title !== "Intern");
     this.setState({ employees });
     
   };
@@ -30,10 +30,10 @@ class Table extends Component {
     this.setState({ employees });
   };
 
-  // sortByAge = id => {
-  //   const employees = this.state.employees.filter(person => person.age > 16);
-  //   this.setState({ employees });
-  // };
+  sortByName = id => {
+    const employees = this.state.employees.name.sort();
+    this.setState({ employees });
+  };
 
   render() {
     return (
@@ -46,7 +46,7 @@ class Table extends Component {
                 <Createpersonrow
                   id={person.id}
                   name={person.name}
-                  age={person.age}
+                  email={person.email}
                   title={person.title}
                 />
               ))}
@@ -54,7 +54,7 @@ class Table extends Component {
           </table>
           <button className="btn btn-warning ml-5" onClick={this.filterInterns}>Remove Interns</button>
           <button className="btn btn-warning ml-5" onClick={this.restoreInterns}>Restore Interns</button>
-          <button className="btn btn-warning ml-5" onClick={this.sortByAge}>Sort by Age</button>
+          <button className="btn btn-warning ml-5" onClick={this.sortByName}>Sort by Name</button>
       </div>
     )
   }
